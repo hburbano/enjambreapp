@@ -19,7 +19,7 @@ export function BottomNav({ items, activeId, onNavigate }: BottomNavProps) {
       className="safe-bottom border-t border-black/8 bg-white/95 backdrop-blur-md"
       aria-label="Navegación principal"
     >
-      <ul className="mx-auto flex max-w-lg items-stretch justify-around px-1 pt-1 pb-1">
+      <ul className="mx-auto flex w-full max-w-3xl items-stretch justify-around px-1 pt-1 pb-1 md:max-w-4xl">
         {items.map((item) => {
           const active = item.id === activeId;
           return (

@@ -38,7 +38,7 @@ export function App() {
   const hideChrome = location.pathname.startsWith("/reportes/");
 
   return (
-    <div className="mx-auto flex h-full max-w-lg flex-col bg-brand-cream shadow-[0_0_0_1px_rgba(0,0,0,0.04)]">
+    <div className="flex h-full flex-col bg-brand-cream">
       {!hideChrome ? <AppHeader /> : null}
       <main className="min-h-0 flex-1 overflow-hidden">
         <Routes>

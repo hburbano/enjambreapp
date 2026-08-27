@@ -3,7 +3,7 @@ import { UserIcon } from "../icons";
 
 export function ProfilePage() {
   return (
-    <div className="h-full overflow-y-auto px-4 py-4">
+    <div className="mx-auto h-full max-w-3xl overflow-y-auto px-4 py-4 md:px-6">
       <h1 className="font-display text-2xl font-extrabold text-brand-ink">
         Perfil
       </h1>

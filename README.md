@@ -1,6 +1,6 @@
 # Enjambres Colombia
 
-![Logo de Enjambres Colombia](./docs/ENJAMBRE.jpeg)
+![Enjambres Colombia — mapa con reportes](./docs/app-screenshot.png)
 
 **Webapp hoy, app completa mañana** — empezamos como webapp (SPA mobile-first) con visión de app nativa en App Store y Play Store (Capacitor reutilizando el mismo UI).
 
@@ -25,7 +25,7 @@ Monorepo pnpm con POC v0 en `apps/web` (UI + datos mock, sin backend). Documenta
 3. **Flujo comunitario** — reporta → localizamos → rescatamos → protegemos
 4. **Secciones** — Mapa, Reportes, Aprende (contenido educativo), Perfil
 
-Ver mockup de referencia: [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg) — análisis en [`docs/mockup-analysis.md`](./docs/mockup-analysis.md).
+Screenshot del POC actual arriba. Mockup de diseño original: [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg) — análisis en [`docs/mockup-analysis.md`](./docs/mockup-analysis.md).
 
 Documentación técnica (inglés): [`docs/README.md`](./docs/README.md) — decisiones de arquitectura, análisis del mockup, estructura del monorepo.
 
@@ -171,7 +171,8 @@ enjambreapp/
 │   ├── types/               # shared types (Report, User, …)
 │   └── config/              # shared tsconfig
 ├── docs/
-│   ├── ENJAMBRE.jpeg        # UI mockup + brand logo
+│   ├── app-screenshot.png   # captura actual del POC (README)
+│   ├── ENJAMBRE.jpeg        # mockup de diseño original
 │   ├── mockup-analysis.md
 │   └── decisions/           # ADRs
 ├── pnpm-workspace.yaml
