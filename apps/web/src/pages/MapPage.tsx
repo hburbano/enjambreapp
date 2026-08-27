@@ -17,8 +17,10 @@ import {
 const COLOMBIA_CENTER: [number, number] = [4.57, -74.3];
 const DEFAULT_ZOOM = 5.4;
 
+// CARTO basemaps require `?key=` (not `api_key`). Without a real key, tiles
+// may 403 or show an "API key required" watermark.
 const CARTO_TILE_URL = config.cartoApiKey
-  ? `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?api_key=${encodeURIComponent(config.cartoApiKey)}`
+  ? `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${encodeURIComponent(config.cartoApiKey)}`
   : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 
 function beePinIcon() {
