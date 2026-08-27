@@ -17,7 +17,9 @@ Constraints from other ADRs and README:
 
 ## Decision
 
-Use a **pnpm monorepo** at the repository root.
+Use a **pnpm workspaces monorepo** at the repository root.
+
+**Not Turborepo.** This is a monorepo via `pnpm-workspace.yaml` + root `package.json` — not [Turborepo](https://turbo.build/). Turborepo/Nx stay out of scope until build orchestration hurts (see below). People sometimes say “turbo repo” meaning “monorepo”; here we mean **pnpm monorepo**.
 
 ### Target layout
 
@@ -77,7 +79,7 @@ Package naming convention: `@enjambres/<name>` (scope TBD at scaffold time).
 1. **One clone, one CI pipeline** — docs, web app, and shared UI stay in sync.
 2. **Extract shared UI early** — map markers, report cards, and nav are reused by `apps/web` now and `apps/mobile` (Capacitor) later.
 3. **pnpm** — fast installs, strict dependency graph, Corepack-friendly.
-4. **No backend in repo v1** — BaaS/hosted backend ([ADR-003](./003-backend-hosting.md)) keeps the monorepo frontend-focused initially; API client can live in `packages/` later if needed.
+4. **Frontend-first monorepo** — v0 has no BE; v1+ uses hosted PocketBase ([ADR-003](./003-backend-hosting.md)); API client can live in `packages/` later if needed.
 
 ## Consequences
 
@@ -88,8 +90,9 @@ Package naming convention: `@enjambres/<name>` (scope TBD at scaffold time).
 ## Out of scope (for now)
 
 - `apps/mobile` (Capacitor) — **planned v2** per [ADR-001](./001-app-vs-webapp.md); monorepo reserves the slot
-- Backend service in-repo — prefer hosted BaaS for v1 speed
-- Turborepo/Nx — add only if build orchestration becomes painful
+- Backend for **v0 POC** — none; UI + mock data on **Vercel** ([ADR-003](./003-backend-hosting.md))
+- Backend service in-repo — PocketBase hosted for **v1+**, not a custom API in this repo yet
+- **Turborepo / Nx** — not planned; add only if multi-package builds become painful
 
 ## Related
 

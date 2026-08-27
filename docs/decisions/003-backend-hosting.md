@@ -1,52 +1,79 @@
 # ADR-003: Backend & hosting
 
-**Status:** Proposed (pending implementation)  
+**Status:** Accepted  
 **Date:** 2026-08-26  
-**Context:** Fastest path to MVP without Vercel, Clerk, or Supabase
+**Updated:** 2026-08-26  
+**Context:** Host the SPA on Vercel; ship a no-backend POC first; add PocketBase later
+
+## Decision summary
+
+| Phase | Frontend | Backend | Goal |
+|-------|----------|---------|------|
+| **v0 — POC** | **Vercel** (`apps/web`) | **None** | Static UI: map shell, tabs, mock data, brand — validate UX from the mockup |
+| **v1 — MVP** | **Vercel** | **PocketBase** (Fly.io / Railway) | Real auth, reports, photos, live map data |
+| **v2+** | Vercel (or revisit only if needed) | PocketBase (+ Capacitor shell) | Store apps, push, etc. |
+
+**Hosting:** **Vercel** (free hobby for POC/MVP).  
+**Cloudflare:** **out of path** — not part of the plan.  
+**Backend:** none for v0; **PocketBase** when we leave the POC.
+
+Still **not default:** Clerk, Supabase (PocketBase covers auth + DB + files when we need a BE).
+
+---
 
 ## Context
 
-The webapp needs:
+Needs over time:
 
-- User auth (Perfil tab, reporter vs rescuer roles)
-- Geolocated reports with photos
-- Realtime or frequent map updates
-- Static/educational content (Aprende)
+- v0: screens that match the mockup (Mapa, Reportes, Aprende, Perfil) with **mock / local data**
+- v1+: auth, geolocated reports with photos, map updates, educational content
 
-Explicit **non-goals for v1 stack selection:**
-
-- Vercel (hosting)
-- Clerk (auth)
-- Supabase (BaaS)
+We previously debated Cloudflare Pages vs Vercel. For a Vite SPA POC, **Vercel is the better default** (free hosting, GitHub → URL, preview deploys). Cloudflare is not required.
 
 ## Options considered
 
-| Stack | Time to MVP | Pros | Cons |
-|-------|-------------|------|------|
-| **Firebase** (Auth + Firestore + Storage + Hosting) | ~days | One SDK, geo patterns, uploads | Google vendor lock-in |
-| **PocketBase + Cloudflare Pages** | ~days | Self-contained BaaS, admin UI, SQL | Host/manage PocketBase instance |
-| **Cloudflare Pages + Workers + R2 + D1** | ~1–2 weeks | Edge, cheap, no Vercel | More custom API code |
-| **Custom Node API + Postgres** | ~weeks+ | Full control | Slowest for solo MVP |
+| Option | Verdict |
+|--------|---------|
+| **Vercel** | **Chosen** — POC and default SPA hosting |
+| **Cloudflare Pages** | **Rejected for this project path** — no material win over Vercel for a static SPA + external API |
+| **PocketBase** | **Chosen for v1+** — auth, DB, files, admin, realtime |
+| **No backend (v0)** | **Chosen for POC** — ship UI fast without ops |
+| **Firebase / Supabase / Clerk** | Not default |
 
-## Decision (recommended v1)
+## Phase detail
 
-**Frontend:** `apps/web` deployed to **Cloudflare Pages**  
-**Backend:** **PocketBase** on Fly.io or Railway  
-**Map:** **Leaflet + OpenStreetMap** (free; switch to Mapbox if UX requires)  
-**Auth:** PocketBase built-in (email; OAuth optional later)
+### v0 — Vercel POC, no backend
 
-### Why this combo
+```
+GitHub → Vercel → apps/web (static Vite build)
+                    │
+                    └── mock reports / fixtures in the client
+```
 
-- Matches [ADR-001](./001-app-vs-webapp.md) static SPA + API model
-- No Clerk/Supabase/Vercel
-- PocketBase covers auth, CRUD, file uploads, admin panel, realtime subscriptions — fits report + photo model
-- Cloudflare Pages: fast deploys, good LATAM CDN, pairs with GitHub repo
+In scope:
 
-### Alternative fast path
+- pnpm monorepo + `apps/web` (Vite + React + Tailwind + React Aria)
+- Mobile-first shell: bottom nav, map placeholder, report list UI, static Aprende, Perfil placeholder
+- Mock data only (JSON / in-memory) — **no API, no auth service, no PocketBase yet**
 
-**Firebase** if accepting Google ecosystem is OK — equally valid, slightly different ops story.
+Out of scope for v0:
 
-## Data model (draft)
+- PocketBase, Clerk, Supabase, Firebase
+- Real uploads, real GPS persistence, notifications
+
+### v1 — same Vercel app + PocketBase
+
+```
+GitHub → Vercel (apps/web)
+              │
+              ▼ HTTPS / realtime
+         PocketBase (Fly / Railway)
+```
+
+- Wire env-based `VITE_API_URL` (or equivalent)
+- Replace mocks with PocketBase collections (users, reports, photos)
+
+## Data model (draft — for v1, not v0)
 
 ```
 users
@@ -57,35 +84,19 @@ reports
   photo_file, status (reported | visible | in_rescue | resolved),
   created_at, updated_at
 
-learn_articles (v1 can be static markdown instead)
+learn_articles (v0/v1 can stay static markdown)
   id, slug, title, body, …
-```
-
-Geo queries: PocketBase supports lat/lng fields; clustering stays client-side (map library).
-
-## Hosting diagram
-
-```
-┌─────────────────┐     HTTPS      ┌──────────────────┐
-│ Cloudflare Pages│ ◄──────────────│  GitHub (main)   │
-│  apps/web build │                └──────────────────┘
-└────────┬────────┘
-         │ REST / realtime
-         ▼
-┌─────────────────┐
-│   PocketBase    │
-│  Fly.io/Railway │
-│  (auth, DB, S3) │
-└─────────────────┘
 ```
 
 ## Consequences
 
-- **Positive:** MVP in days; admin UI for moderating reports; excluded vendors avoided.
-- **Negative:** Operate PocketBase uptime/backups; plan migration if scale exceeds SQLite comfort.
-- **Open:** Final host choice (Fly vs Railway) at scaffold time.
+- **Positive:** POC on free Vercel with zero backend ops.
+- **Positive:** Adding PocketBase later is an integration step, not a hosting rewrite.
+- **Negative:** v0 demos are fake data — clear that to stakeholders.
+- **Neutral:** Cloudflare removed from decisions so the path stays simple.
 
 ## Related
 
-- [Mockup analysis](../mockup-analysis.md) — implied entities and flows
-- [ADR-002: Monorepo structure](./002-monorepo-structure.md)
+- [Mockup analysis](../mockup-analysis.md)
+- [ADR-001: App vs webapp](./001-app-vs-webapp.md)
+- [ADR-002: Monorepo structure](./002-monorepo-structure.md) — **pnpm workspaces, not Turborepo**
