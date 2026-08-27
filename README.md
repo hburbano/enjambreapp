@@ -1,12 +1,12 @@
 # Enjambres Colombia
 
-![Logo de Enjambres Colombia](./docs/ENJAMBRE.jpeg)
-
 **Webapp hoy, app completa mañana** — empezamos como webapp (SPA mobile-first) con visión de app nativa en App Store y Play Store (Capacitor reutilizando el mismo UI).
 
 > *Juntos protegemos a las abejas.*
 
 Documentación de referencia para el stack del proyecto. **Solo guía de configuración — sin código de aplicación aún.**
+
+Mockup de referencia (screenshot): [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg) — ver análisis en [`docs/mockup-analysis.md`](./docs/mockup-analysis.md).
 
 ## Qué tipo de app es
 
@@ -24,8 +24,6 @@ Documentación de referencia para el stack del proyecto. **Solo guía de configu
 2. **Mapa en vivo** — ver reportes cercanos (clustering por zona)
 3. **Flujo comunitario** — reporta → localizamos → rescatamos → protegemos
 4. **Secciones** — Mapa, Reportes, Aprende (contenido educativo), Perfil
-
-Ver mockup de referencia: [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg)
 
 Documentación técnica (inglés): [`docs/README.md`](./docs/README.md) — decisiones de arquitectura, análisis del mockup, estructura del monorepo.
 
@@ -185,7 +183,7 @@ enjambreapp/
 │   ├── types/               # (planned) shared types
 │   └── config/              # (planned) eslint, tsconfig, tailwind
 ├── docs/
-│   ├── ENJAMBRE.jpeg        # UI mockup + brand logo
+│   ├── ENJAMBRE.jpeg        # UI mockup screenshot (not embedded in root README)
 │   ├── mockup-analysis.md   # mockup read (English)
 │   └── decisions/           # ADRs (English)
 ├── README.md
