@@ -7,7 +7,7 @@ export function ProfilePage() {
         Perfil
       </h1>
       <p className="mt-1 text-sm text-neutral-600">
-        La cuenta llega con PocketBase en v1. Por ahora es un marcador de
+        La cuenta llega con Supabase en v1. Por ahora es un marcador de
         posición.
       </p>
 
@@ -24,7 +24,7 @@ export function ProfilePage() {
           className="mt-5"
           onPress={() =>
             window.alert(
-              "Autenticación pendiente — se conectará con PocketBase en v1.",
+              "Autenticación pendiente — se conectará con Supabase en v1.",
             )
           }
         >

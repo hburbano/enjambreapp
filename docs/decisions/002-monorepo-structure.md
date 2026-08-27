@@ -79,7 +79,7 @@ Package naming convention: `@enjambres/<name>` (scope TBD at scaffold time).
 1. **One clone, one CI pipeline** — docs, web app, and shared UI stay in sync.
 2. **Extract shared UI early** — map markers, report cards, and nav are reused by `apps/web` now and `apps/mobile` (Capacitor) later.
 3. **pnpm** — fast installs, strict dependency graph, Corepack-friendly.
-4. **Frontend-first monorepo** — v0 has no BE; v1+ uses hosted PocketBase ([ADR-003](./003-backend-hosting.md)); API client can live in `packages/` later if needed.
+4. **Frontend-first monorepo** — v0 has no BE; v1+ uses Supabase free tier ([ADR-003](./003-backend-hosting.md)); API client can live in `packages/` later if needed.
 
 ## Consequences
 
@@ -91,7 +91,7 @@ Package naming convention: `@enjambres/<name>` (scope TBD at scaffold time).
 
 - `apps/mobile` (Capacitor) — **planned v2** per [ADR-001](./001-app-vs-webapp.md); monorepo reserves the slot
 - Backend for **v0 POC** — none; UI + mock data on **Vercel** ([ADR-003](./003-backend-hosting.md))
-- Backend service in-repo — PocketBase hosted for **v1+**, not a custom API in this repo yet
+- Backend service in-repo — Supabase hosted for **v1+** (PocketBase remains a liked alternative); not a custom API in this repo yet
 - **Turborepo / Nx** — not planned; add only if multi-package builds become painful
 
 ## Related
