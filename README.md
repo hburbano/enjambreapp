@@ -1,23 +1,57 @@
-# Emjambre App
+# Enjambres Colombia
 
-![Logo de Emjambre](./docs/ENJAMBRE.jpeg)
+![Logo de Enjambres Colombia](./docs/ENJAMBRE.jpeg)
 
-Documentación de referencia para el stack del proyecto. **Solo guía de configuración — sin implementación de código aún.**
+**Webapp hoy, app completa mañana** — empezamos como webapp (SPA mobile-first) con visión de app nativa en App Store y Play Store (Capacitor reutilizando el mismo UI).
+
+> *Juntos protegemos a las abejas.*
+
+Documentación de referencia para el stack del proyecto. **Solo guía de configuración — sin código de aplicación aún.**
+
+## Qué tipo de app es
+
+| | |
+|---|---|
+| **Tipo** | Webapp ahora → app móvil completa (v2, Capacitor) |
+| **Dominio** | Conservación / ciencia ciudadana |
+| **Usuarios** | Ciudadanos que reportan enjambres; apicultores y rescatistas que atienden reportes |
+| **Plataforma v1** | Navegador (mobile-first) |
+| **Plataforma v2** | iOS + Android (misma UI, shell nativo) |
+
+### Funcionalidad principal
+
+1. **Reportar enjambre** — foto + ubicación en el mapa
+2. **Mapa en vivo** — ver reportes cercanos (clustering por zona)
+3. **Flujo comunitario** — reporta → localizamos → rescatamos → protegemos
+4. **Secciones** — Mapa, Reportes, Aprende (contenido educativo), Perfil
+
+Ver mockup de referencia: [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg)
+
+Documentación técnica (inglés): [`docs/README.md`](./docs/README.md) — decisiones de arquitectura, análisis del mockup, estructura del monorepo.
+
+## Convenciones
+
+| Área | Idioma |
+|------|--------|
+| Código (identificadores, comentarios en código, commits técnicos) | Inglés |
+| Copy (texto de UI, documentación, mensajes al usuario) | Español |
+
+---
 
 ## Stack
 
 | Herramienta | Rol |
 |-------------|-----|
-| **Node.js** (última LTS) | Runtime de JavaScript |
+| **Node.js** (latest LTS) | Runtime de JavaScript |
 | **asdf** | Gestor de versiones (Node, etc.) |
 | **Corepack + pnpm** | Gestor de paquetes |
 | **React** | Biblioteca de UI |
 | **React Aria** | Componentes accesibles (Adobe) |
-| **Tailwind CSS** | Utilidades de estilo |
+| **Tailwind CSS** | Estilos con utilidades |
 
 ---
 
-## 1. asdf — instalar y usar Node.js (última versión)
+## 1. asdf — instalar y usar Node.js (latest)
 
 [asdf](https://asdf-vm.com/) permite fijar la versión de Node por proyecto.
 
@@ -27,7 +61,7 @@ Documentación de referencia para el stack del proyecto. **Solo guía de configu
 brew install asdf
 ```
 
-Agrega asdf a tu shell (ejemplo para zsh):
+Agrega asdf a tu shell (ejemplo con zsh):
 
 ```bash
 echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ~/.zshrc
@@ -46,7 +80,7 @@ npm --version
 
 ### Fijar versión en este proyecto (opcional)
 
-Crea un archivo `.tool-versions` en la raíz:
+Crea un archivo `.tool-versions` en la raíz del repo:
 
 ```
 nodejs latest
@@ -56,7 +90,7 @@ nodejs latest
 
 ## 2. Corepack y pnpm
 
-[Corepack](https://nodejs.org/api/corepack.html) viene con Node 16.10+ y activa gestores como pnpm sin instalarlos globalmente.
+[Corepack](https://nodejs.org/api/corepack.html) viene incluido con Node 16.10+ y habilita gestores como pnpm sin instalarlos de forma global.
 
 ```bash
 corepack enable
@@ -67,10 +101,10 @@ pnpm --version
 ### Comandos habituales de pnpm
 
 ```bash
-pnpm install          # instalar dependencias
-pnpm add <paquete>      # agregar dependencia
-pnpm run dev            # servidor de desarrollo (cuando exista el proyecto)
-pnpm run build          # build de producción
+pnpm install          # install dependencies
+pnpm add <package>    # add a dependency
+pnpm run dev          # start dev server
+pnpm run build        # production build
 ```
 
 ---
@@ -118,7 +152,7 @@ export default {
 };
 ```
 
-Y en tu CSS principal:
+En tu archivo CSS principal:
 
 ```css
 @import "tailwindcss";
@@ -139,15 +173,26 @@ Guía oficial: [Install Tailwind with Vite](https://tailwindcss.com/docs/install
 
 ---
 
-## Estructura actual del repositorio
+## Estructura del monorepo
 
 ```
-emjambreapp/
+enjambreapp/
+├── apps/
+│   ├── web/                 # (planned) Vite + React SPA — v1
+│   └── mobile/              # (planned v2) Capacitor → App Store / Play Store
+├── packages/
+│   ├── ui/                  # (planned) shared components
+│   ├── types/               # (planned) shared types
+│   └── config/              # (planned) eslint, tsconfig, tailwind
 ├── docs/
-│   └── ENJAMBRE.jpeg    # Logo / imagen de marca
-├── README.md            # Esta guía (español)
+│   ├── ENJAMBRE.jpeg        # UI mockup + brand logo
+│   ├── mockup-analysis.md   # mockup read (English)
+│   └── decisions/           # ADRs (English)
+├── README.md
 └── .gitignore
 ```
+
+Ver [`docs/decisions/002-monorepo-structure.md`](./docs/decisions/002-monorepo-structure.md) para detalles.
 
 ---
 
