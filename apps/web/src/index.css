@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@source "../../../packages/ui/src";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --color-brand-yellow: #f5c518;
+  --color-brand-yellow-dark: #d4a80a;
+  --color-brand-ink: #111111;
+  --color-brand-cream: #fff8e7;
+  --color-brand-map: #e8ebe6;
+  --font-display: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-brand-ink);
+    background: var(--color-brand-cream);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+}
+
+/* Leaflet marker overrides */
+.enjambres-pin {
+  background: transparent;
+  border: none;
+}
+
+.leaflet-container {
+  font: inherit;
+  background: var(--color-brand-map);
+}

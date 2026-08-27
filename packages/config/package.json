@@ -1,0 +1,15 @@
+{
+  "name": "@enjambres/config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/react.json": "./tsconfig/react.json"
+  },
+  "scripts": {
+    "build": "echo \"config has nothing to build\"",
+    "lint": "echo \"No lint configured yet\"",
+    "typecheck": "echo \"No typecheck for config\""
+  }
+}

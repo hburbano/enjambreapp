@@ -85,7 +85,7 @@ Package naming convention: `@enjambres/<name>` (scope TBD at scaffold time).
 
 - **Positive:** Clear place for each concern; easy to add `apps/admin` or `packages/api-client` later.
 - **Negative:** Slightly more setup than a flat Vite folder; developers need pnpm workspace basics.
-- **Action:** Scaffold `apps/web` and workspace files when implementation starts — not done yet.
+- **Action:** Scaffolded `apps/web` + workspace packages (v0 POC, 2026-08-26).
 
 ## Out of scope (for now)
 

@@ -6,7 +6,7 @@
 
 > *Juntos protegemos a las abejas.*
 
-Documentación de referencia para el stack del proyecto. **Solo guía de configuración — sin código de aplicación aún.**
+Monorepo pnpm con POC v0 en `apps/web` (UI + datos mock, sin backend). Documentación técnica en [`docs/`](./docs/).
 
 ## Qué tipo de app es
 
@@ -162,14 +162,14 @@ Guía oficial: [Install Tailwind with Vite](https://tailwindcss.com/docs/install
 
 ---
 
-## 5. Orden recomendado de setup (desde cero)
+## Arranque local
 
-1. Instalar **asdf** y **Node.js latest**
-2. Habilitar **Corepack** y activar **pnpm**
-3. Crear el proyecto React (Vite + TypeScript)
-4. Añadir **Tailwind CSS**
-5. Añadir **React Aria** / **React Aria Components**
-6. Configurar lint, formato y tests según necesidad
+```bash
+corepack enable
+pnpm install
+pnpm dev          # http://localhost:5173 — apps/web
+pnpm build        # build de todos los paquetes
+```
 
 ---
 
@@ -178,18 +178,16 @@ Guía oficial: [Install Tailwind with Vite](https://tailwindcss.com/docs/install
 ```
 enjambreapp/
 ├── apps/
-│   ├── web/                 # (planned) Vite + React SPA — v1
-│   └── mobile/              # (planned v2) Capacitor → App Store / Play Store
+│   ├── web/                 # Vite + React SPA (v0 POC)
+│   └── mobile/              # (v2) Capacitor → App Store / Play Store
 ├── packages/
-│   ├── ui/                  # (planned) shared components
-│   ├── types/               # (planned) shared types
-│   └── config/              # (planned) eslint, tsconfig, tailwind
+│   ├── ui/                  # React Aria + Tailwind components
+│   ├── types/               # shared types (Report, User, …)
+│   └── config/              # shared tsconfig
 ├── docs/
-│   ├── ENJAMBRE.jpeg        # UI mockup + brand logo
-│   ├── mockup-analysis.md   # mockup read (English)
-│   └── decisions/           # ADRs (English)
-├── README.md
-└── .gitignore
+├── pnpm-workspace.yaml
+├── package.json
+└── README.md
 ```
 
 Ver [`docs/decisions/002-monorepo-structure.md`](./docs/decisions/002-monorepo-structure.md) para detalles.
