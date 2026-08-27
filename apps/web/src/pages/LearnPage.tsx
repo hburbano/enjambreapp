@@ -1,6 +1,12 @@
 import { mockArticles } from "../data/mock";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function LearnPage() {
+  usePageMeta(
+    "Aprende",
+    "Guías para reportar enjambres con seguridad, entender por qué importan las abejas y cómo funciona el rescate.",
+  );
+
   return (
     <div className="mx-auto h-full max-w-3xl overflow-y-auto px-4 py-4 md:px-6">
       <h1 className="font-display text-2xl font-extrabold text-brand-ink">

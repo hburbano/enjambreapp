@@ -108,5 +108,6 @@ Geo: store `lat`/`lng` (or PostGIS later if queries hurt); clustering stays clie
 ## Related
 
 - [Mockup analysis](../mockup-analysis.md)
+- [SEO](../seo.md) — `VITE_SITE_URL`, Open Graph, sitemap on the Vercel SPA
 - [ADR-001: App vs webapp](./001-app-vs-webapp.md)
 - [ADR-002: Monorepo structure](./002-monorepo-structure.md) — **pnpm workspaces, not Turborepo**
