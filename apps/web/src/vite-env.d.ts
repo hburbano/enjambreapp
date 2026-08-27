@@ -3,7 +3,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_CARTO_API_KEY?: string;
-  /** Production origin, e.g. https://enjambrescolombia.vercel.app (no trailing slash). */
+  /** Production origin, e.g. https://enjambreapp.vercel.app (no trailing slash). */
   readonly VITE_SITE_URL?: string;
 }
 

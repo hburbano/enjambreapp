@@ -12,18 +12,22 @@ How search and social previews work for the Vite SPA in `apps/web`.
 | Route UX | Per-route `document.title` + description via `usePageMeta` |
 | Structured data | JSON-LD `WebApplication` on the homepage |
 
-## Production requirement: `VITE_SITE_URL`
+## Production site URL
 
 Open Graph, canonical, and sitemap **need an absolute origin**.
 
+**Current production URL:** `https://enjambreapp.vercel.app` (defined in `apps/web/site.ts` as `DEFAULT_SITE_URL`).
+
+Production builds use that default when `VITE_SITE_URL` is unset. Override anytime (custom domain, preview) via env:
+
 ```bash
 # apps/web/.env.local (local) or Vercel → Environment Variables
-VITE_SITE_URL=https://your-deployment.vercel.app
+VITE_SITE_URL=https://enjambreapp.vercel.app
 ```
 
-No trailing slash. After setting it, redeploy so `index.html`, `robots.txt`, and `sitemap.xml` pick up absolute URLs (see `apps/web/vite.seo.ts`).
+No trailing slash. After changing it, redeploy so `index.html`, `robots.txt`, and `sitemap.xml` pick up the new origin (see `apps/web/vite.seo.ts`).
 
-Without it, builds still work: paths stay relative (`/og-image.png`, `/`). Link previews may still resolve the image against the request URL, but canonical/sitemap absolute URLs will be incomplete until the env is set.
+Local dev (`pnpm dev`) leaves the site URL empty unless you set `VITE_SITE_URL` in `.env.local`, so canonical tags do not point at production while you work locally.
 
 ## Assets (`apps/web/public/`)
 
@@ -50,7 +54,7 @@ Without it, builds still work: paths stay relative (`/og-image.png`, `/`). Link 
 
 ## Checklist after deploy
 
-- [ ] Set `VITE_SITE_URL` to the production origin and redeploy
+- [x] Production default: `https://enjambreapp.vercel.app` (override with `VITE_SITE_URL` when the domain changes)
 - [ ] Open `/robots.txt` and `/sitemap.xml` — locs should be absolute
 - [ ] Share the homepage URL in [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or similar and confirm `og:image`
 - [ ] Confirm favicon and theme color in the browser tab

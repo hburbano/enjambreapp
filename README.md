@@ -148,11 +148,11 @@ pnpm build        # build de todos los paquetes
 | Variable             | Descripción                                                                      |
 | -------------------- | -------------------------------------------------------------------------------- |
 | `VITE_CARTO_API_KEY` | API key de Carto basemaps (gratis). Sin una key real, los tiles salen con watermark o fallan. Pídela en https://carto.com/basemaps/apikey |
-| `VITE_SITE_URL`      | Origen canónico (sin `/` final) para Open Graph, canonical y sitemap. **Requerido en producción.** |
+| `VITE_SITE_URL`      | Origen canónico (sin `/` final) para Open Graph, canonical y sitemap. Default producción: `https://enjambreapp.vercel.app` |
 
 1. Copia el template: `cp apps/web/.env.example apps/web/.env.local`
 2. Pon tus valores reales en `.env.local` (gitignored; no uses placeholders)
-3. En Vercel, define `VITE_CARTO_API_KEY` y `VITE_SITE_URL` en Project → Settings → Environment Variables y redeploy
+3. En Vercel, define `VITE_CARTO_API_KEY` (y opcionalmente `VITE_SITE_URL` si cambia el dominio) en Project → Settings → Environment Variables y redeploy
 
 Reinicia el servidor de Vite después de cambiar env vars (`pnpm dev`).
 
