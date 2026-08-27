@@ -105,6 +105,9 @@ pnpm install          # install dependencies
 pnpm add <package>    # add a dependency
 pnpm run dev          # start dev server
 pnpm run build        # production build
+pnpm lint             # ESLint
+pnpm test             # Vitest (UI render/click)
+pnpm typecheck        # TypeScript across packages
 ```
 
 ---
