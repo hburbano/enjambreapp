@@ -4,10 +4,12 @@ import tailwindcss from "@tailwindcss/vite";
 import Icons from "unplugin-icons/vite";
 import path from "node:path";
 import { enjambresSeoPlugin } from "./vite.seo";
+import { resolveSiteUrl } from "./site";
 
 export default defineConfig(({ mode }) => {
   // Loads `.env`, `.env.local`, `.env.[mode]`, etc. from apps/web
   const env = loadEnv(mode, __dirname, "VITE_");
+  const siteUrl = resolveSiteUrl(env.VITE_SITE_URL, mode);
 
   return {
     envDir: __dirname,
@@ -15,7 +17,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       tailwindcss(),
-      enjambresSeoPlugin(env.VITE_SITE_URL),
+      enjambresSeoPlugin(siteUrl),
       // Compiles only the icons we import — never ships the full set.
       Icons({
         compiler: "jsx",
