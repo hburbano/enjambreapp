@@ -1,0 +1,7 @@
+# Crawlers — see docs/seo.md
+User-agent: *
+Allow: /
+
+# Absolute Sitemap URL is injected at build when VITE_SITE_URL is set.
+# Fallback path works for local preview; production should set VITE_SITE_URL.
+Sitemap: /sitemap.xml

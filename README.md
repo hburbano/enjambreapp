@@ -27,7 +27,7 @@ Monorepo pnpm con POC v0 en `apps/web` (UI + datos mock, sin backend). Documenta
 
 Screenshot del POC actual arriba. Mockup de diseño original: [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg) — análisis en [`docs/mockup-analysis.md`](./docs/mockup-analysis.md).
 
-Documentación técnica (inglés): [`docs/README.md`](./docs/README.md) — decisiones de arquitectura, análisis del mockup, estructura del monorepo.
+Documentación técnica (inglés): [`docs/README.md`](./docs/README.md) — decisiones de arquitectura, análisis del mockup, SEO, estructura del monorepo.
 
 ## Convenciones
 
@@ -148,12 +148,15 @@ pnpm build        # build de todos los paquetes
 | Variable             | Descripción                                                                      |
 | -------------------- | -------------------------------------------------------------------------------- |
 | `VITE_CARTO_API_KEY` | API key de Carto basemaps (gratis). Sin una key real, los tiles salen con watermark o fallan. Pídela en https://carto.com/basemaps/apikey |
+| `VITE_SITE_URL`      | Origen canónico (sin `/` final) para Open Graph, canonical y sitemap. **Requerido en producción.** |
 
 1. Copia el template: `cp apps/web/.env.example apps/web/.env.local`
-2. Pon tu key real en `.env.local` (gitignored; no uses el placeholder `abc123`)
-3. En Vercel, define `VITE_CARTO_API_KEY` en Project → Settings → Environment Variables y redeploy
+2. Pon tus valores reales en `.env.local` (gitignored; no uses placeholders)
+3. En Vercel, define `VITE_CARTO_API_KEY` y `VITE_SITE_URL` en Project → Settings → Environment Variables y redeploy
 
 Reinicia el servidor de Vite después de cambiar env vars (`pnpm dev`).
+
+SEO (meta, OG, robots, sitemap): [`docs/seo.md`](./docs/seo.md).
 
 ---
 
@@ -164,6 +167,7 @@ enjambreapp/
 ├── apps/
 │   ├── web/                 # Vite + React SPA (v0 POC)
 │   │   ├── .env.example     # template de env (copiar a .env.local)
+│   │   ├── public/          # favicon, og-image, robots, sitemap, manifest
 │   │   └── …
 │   └── mobile/              # (v2) Capacitor → App Store / Play Store
 ├── packages/
@@ -174,6 +178,7 @@ enjambreapp/
 │   ├── app-screenshot.png   # captura actual del POC (README)
 │   ├── ENJAMBRE.jpeg        # mockup de diseño original
 │   ├── mockup-analysis.md
+│   ├── seo.md               # SEO / Open Graph / sitemap
 │   └── decisions/           # ADRs
 ├── pnpm-workspace.yaml
 ├── package.json

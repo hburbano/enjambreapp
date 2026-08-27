@@ -1,0 +1,25 @@
+{
+  "name": "Enjambres Colombia",
+  "short_name": "Enjambres",
+  "description": "Reporta enjambres y protege a las abejas en Colombia.",
+  "lang": "es-CO",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F5C518",
+  "theme_color": "#F5C518",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

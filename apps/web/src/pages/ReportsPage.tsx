@@ -2,8 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { ReportCard } from "@enjambres/ui";
 import { mockReports } from "../data/mock";
 import { BeeIcon, beeSize } from "../icons";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function ReportsPage() {
+  usePageMeta(
+    "Reportes",
+    "Lista de enjambres reportados en Colombia. Revisa estado, ciudad y detalle de cada reporte.",
+  );
   const navigate = useNavigate();
   const sorted = [...mockReports].sort(
     (a, b) =>

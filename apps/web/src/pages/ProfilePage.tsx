@@ -1,7 +1,13 @@
 import { Button } from "@enjambres/ui";
 import { UserIcon } from "../icons";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function ProfilePage() {
+  usePageMeta(
+    "Perfil",
+    "Tu perfil en Enjambres Colombia. Inicio de sesión y roles llegan con Supabase en v1.",
+  );
+
   return (
     <div className="mx-auto h-full max-w-3xl overflow-y-auto px-4 py-4 md:px-6">
       <h1 className="font-display text-2xl font-extrabold text-brand-ink">

@@ -13,6 +13,7 @@ import {
   beePinDiscHtml,
   beeSize,
 } from "../icons";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const COLOMBIA_CENTER: [number, number] = [4.57, -74.3];
 const DEFAULT_ZOOM = 5.4;
@@ -94,9 +95,14 @@ export function MapPage() {
   const navigate = useNavigate();
   const icon = useMemo(() => beePinIcon(), []);
   const clusters = useMemo(() => clusterReports(mockReports), []);
+  usePageMeta(
+    "Mapa de enjambres",
+    "Mapa en vivo de enjambres reportados en Colombia. Explora reportes cercanos y reporta un enjambre.",
+  );
 
   return (
     <div className="relative h-full">
+      <h1 className="sr-only">Mapa de enjambres en Colombia</h1>
       <MapContainer
         center={COLOMBIA_CENTER}
         zoom={DEFAULT_ZOOM}

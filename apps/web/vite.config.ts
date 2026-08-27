@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import Icons from "unplugin-icons/vite";
 import path from "node:path";
+import { enjambresSeoPlugin } from "./vite.seo";
 
 export default defineConfig(({ mode }) => {
   // Loads `.env`, `.env.local`, `.env.[mode]`, etc. from apps/web
@@ -14,6 +15,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       tailwindcss(),
+      enjambresSeoPlugin(env.VITE_SITE_URL),
       // Compiles only the icons we import — never ships the full set.
       Icons({
         compiler: "jsx",

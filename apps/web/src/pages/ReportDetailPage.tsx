@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@enjambres/ui";
 import { getReportById } from "../data/mock";
 import { ArrowLeftIcon, BeeIcon, beeSize } from "../icons";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const statusLabel = {
   reported: "Reportado",
@@ -14,6 +15,15 @@ export function ReportDetailPage() {
   const { id = "" } = useParams();
   const navigate = useNavigate();
   const report = getReportById(id);
+
+  usePageMeta(
+    report
+      ? `${report.title} — ${report.city}`
+      : "Reporte no encontrado",
+    report
+      ? `Enjambre en ${report.neighborhood}, ${report.city} (${report.department}). Estado: ${statusLabel[report.status]}.`
+      : "El reporte solicitado no existe o ya no está disponible.",
+  );
 
   if (!report) {
     return (
