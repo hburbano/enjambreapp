@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@enjambres/ui";
 import { getReportById } from "../data/mock";
-import { ArrowLeftIcon, BeeIcon } from "../icons";
+import { ArrowLeftIcon, BeeIcon, beeSize } from "../icons";
 
 const statusLabel = {
   reported: "Reportado",
@@ -36,7 +36,7 @@ export function ReportDetailPage() {
 
       <div className="px-4 py-5">
         <div className="flex h-40 items-center justify-center rounded-2xl bg-brand-yellow/40 text-brand-ink">
-          <BeeIcon size={64} />
+          <BeeIcon size={beeSize.hero} />
         </div>
         <h2 className="mt-4 font-display text-2xl font-extrabold">
           {report.title}

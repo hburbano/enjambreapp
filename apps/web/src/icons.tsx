@@ -2,11 +2,10 @@
  * Icons via unplugin-icons + Iconify JSON packs.
  * Each `~icons/...` import compiles to one SVG component — unused icons never enter the JS bundle.
  *
- * Bee: Material Design Icons (`mdi`)
+ * Bee: custom outline (Lucide Lab path) — all sizes/strokes live in `bee` below.
  * UI chrome: Tabler (`tabler`)
  */
 import type { ComponentType, SVGProps } from "react";
-import Bee from "~icons/mdi/bee";
 import MapPin from "~icons/tabler/map-pin";
 import ClipboardList from "~icons/tabler/clipboard-list";
 import Book from "~icons/tabler/book";
@@ -18,9 +17,59 @@ export type IconProps = SVGProps<SVGSVGElement> & {
   size?: number | string;
 };
 
+/**
+ * Single source of truth for the bee glyph.
+ * Call sites pass `beeSize.*` / use `beePinDiscHtml` — no raw bee px at the edge.
+ */
+export const bee = {
+  viewBox: 24,
+  /** Pixel sizes by role */
+  size: {
+    /** Inside the hex brand mark */
+    brand: 20,
+    /** Buttons, FAB, nav-adjacent */
+    chrome: 20,
+    /** List / card leading marks */
+    list: 22,
+    /** Detail / empty-state hero */
+    hero: 44,
+    /** Inside the map pin disc */
+    marker: 22,
+  },
+  /** Stroke weight in viewBox units, keyed by optical band */
+  stroke: {
+    sm: 1.5,
+    md: 1.6,
+    lg: 1.75,
+  },
+  /** Leaflet pin chrome around the marker glyph */
+  pin: {
+    disc: 36,
+    border: 1.5,
+    fill: "#F5C518",
+    ink: "#111111",
+  },
+} as const;
+
+/** Role → pixel size. Prefer this at call sites. */
+export const beeSize = bee.size;
+
+/** Path from Lucide Lab (`lucide-lab:bee`, ISC) — one body for React + Leaflet. */
+const BEE_PATHS = [
+  "m8 2 1.88 1.88m4.24 0L16 2M9 7V6a3 3 0 1 1 6 0v1M5 7a3 3 0 1 0 2.2 5.1C9.1 10 12 7 12 7s2.9 3 4.8 5.1A3 3 0 1 0 19 7Zm2.56 5h8.87M7.5 17h9",
+  "M15.5 10.7c.9.9 1.4 2.1 1.5 3.3c0 5.8-5 8-5 8s-5-2.2-5-8c.1-1.2.6-2.4 1.5-3.3",
+] as const;
+
+/** Stroke for a given pixel size — bands derived from `bee.size`, not magic cutoffs. */
+export function beeStrokeFor(size: number): number {
+  if (size >= bee.size.hero) return bee.stroke.lg;
+  if (size >= bee.size.list) return bee.stroke.md;
+  return bee.stroke.sm;
+}
+
 function withSize(
   Icon: ComponentType<SVGProps<SVGSVGElement>>,
-  defaultSize = 20,
+  defaultSize: number = bee.size.chrome,
 ) {
   return function SizedIcon({
     size = defaultSize,
@@ -39,16 +88,59 @@ function withSize(
   };
 }
 
-export const BeeIcon = withSize(Bee, 22);
-export const MapPinIcon = withSize(MapPin, 22);
-export const ClipboardListIcon = withSize(ClipboardList, 22);
-export const BookIcon = withSize(Book, 22);
-export const UserIcon = withSize(User, 22);
-export const CurrentLocationIcon = withSize(CurrentLocation, 22);
-export const ArrowLeftIcon = withSize(ArrowLeft, 20);
+/**
+ * Outline bee — same stroke language as Tabler (round caps/joins).
+ * Default size/stroke come from `bee`; override only when a role needs it.
+ */
+export function BeeIcon({
+  size = bee.size.chrome,
+  strokeWidth,
+  width,
+  height,
+  ...props
+}: IconProps & { strokeWidth?: number | string }) {
+  const numericSize =
+    typeof size === "number" ? size : Number(size) || bee.size.chrome;
+  const stroke = strokeWidth ?? beeStrokeFor(numericSize);
 
-/** MDI bee path — used for Leaflet markers (HTML string, not React). */
-const MDI_BEE_PATH =
-  "M17.4 9C17 7.8 16.2 7 15 6.5V5h-1v1.4h-.4c-1.1 0-2 .4-2.8 1.2l-.4.4L9 7.5c-.3-.1-.6-.2-1-.2c-.6 0-1.2.2-1.7.6c-.6.4-.9.9-1.1 1.4c-.2.7-.2 1.3 0 2c.3.7.6 1.2 1.1 1.5c-.4 1.5-.1 2.8 1 3.9c.8.8 1.7 1.2 2.8 1.2c.5 0 .8 0 1.1-.1c.6.8 1.4 1.3 2.4 1.3c.3 0 .7 0 1-.1c.6-.2 1-.6 1.4-1.1c.4-.6.6-1.1.6-1.7c0-.4 0-.7-.1-1l-.5-1.6l.6-.4c.8-.8 1.2-1.9 1.1-3.1H19V9zm-9.7 2.3c-.6-.3-.8-.7-.6-1.3q.3-.9 1.2-.6l3.2 1.2c-1.6.8-2.8 1-3.8.7m6.3 5.6c-.6.2-1 0-1.3-.6c-.3-1-.1-2.2.7-3.8l1.2 3.1c.2.7 0 1.1-.6 1.3m1.2-5.3l-.6-1.6v-.1l-.3-.3h-.1L12.6 9c.4-.3.8-.5 1.3-.5s1 .2 1.4.6s.6.8.6 1.3c-.2.3-.4.8-.7 1.2";
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width ?? size}
+      height={height ?? size}
+      viewBox={`0 0 ${bee.viewBox} ${bee.viewBox}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={stroke}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden={props["aria-hidden"] ?? true}
+      {...props}
+    >
+      {BEE_PATHS.map((d) => (
+        <path key={d} d={d} />
+      ))}
+    </svg>
+  );
+}
 
-export const beeMarkerSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111111" d="${MDI_BEE_PATH}"/></svg>`;
+export const MapPinIcon = withSize(MapPin, bee.size.list);
+export const ClipboardListIcon = withSize(ClipboardList, bee.size.list);
+export const BookIcon = withSize(Book, bee.size.list);
+export const UserIcon = withSize(User, bee.size.list);
+export const CurrentLocationIcon = withSize(CurrentLocation, bee.size.list);
+export const ArrowLeftIcon = withSize(ArrowLeft, bee.size.chrome);
+
+const markerStroke = beeStrokeFor(bee.size.marker);
+const beePathsMarkup = BEE_PATHS.map((d) => `<path d="${d}"/>`).join("");
+
+/** Stroke bee for Leaflet markers (HTML string, not React). */
+export const beeMarkerSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${bee.size.marker}" height="${bee.size.marker}" viewBox="0 0 ${bee.viewBox} ${bee.viewBox}" fill="none" stroke="${bee.pin.ink}" stroke-width="${markerStroke}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${beePathsMarkup}</svg>`;
+
+/** Full map-pin disc HTML — disc size/border/colors from `bee.pin`. */
+export const beePinDiscHtml = `<div style="
+  width:${bee.pin.disc}px;height:${bee.pin.disc}px;border-radius:9999px;
+  background:${bee.pin.fill};border:${bee.pin.border}px solid ${bee.pin.ink};
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+">${beeMarkerSvg}</div>`;
