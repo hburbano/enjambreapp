@@ -147,13 +147,13 @@ pnpm build        # build de todos los paquetes
 
 | Variable             | Descripción                                                                      |
 | -------------------- | -------------------------------------------------------------------------------- |
-| `VITE_CARTO_API_KEY` | API key de Carto para el mapa (tiles). Opcional: sin key se usan tiles públicos. |
+| `VITE_CARTO_API_KEY` | API key de Carto basemaps (gratis). Sin una key real, los tiles salen con watermark o fallan. Pídela en https://carto.com/basemaps/apikey |
 
 1. Copia el template: `cp apps/web/.env.example apps/web/.env.local`
-2. Pon tu key en `.env.local` (gitignored; no la subas al repo)
-3. En Vercel/Cursor, define `VITE_CARTO_API_KEY` en la UI de secrets/env
+2. Pon tu key real en `.env.local` (gitignored; no uses el placeholder `abc123`)
+3. En Vercel, define `VITE_CARTO_API_KEY` en Project → Settings → Environment Variables y redeploy
 
-Reinicia el servidor de Vite después de cambiar env vars.
+Reinicia el servidor de Vite después de cambiar env vars (`pnpm dev`).
 
 ---
 
