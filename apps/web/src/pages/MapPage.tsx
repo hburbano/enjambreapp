@@ -5,6 +5,7 @@ import type { Report } from "@enjambres/types";
 import { Button } from "@enjambres/ui";
 import { useNavigate } from "react-router-dom";
 import { mockReports } from "../data/mock";
+import { config } from "../config";
 import {
   BeeIcon,
   CurrentLocationIcon,
@@ -15,6 +16,10 @@ import {
 
 const COLOMBIA_CENTER: [number, number] = [4.57, -74.3];
 const DEFAULT_ZOOM = 5.4;
+
+const CARTO_TILE_URL = config.cartoApiKey
+  ? `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?api_key=${encodeURIComponent(config.cartoApiKey)}`
+  : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 
 function beePinIcon() {
   const disc = bee.pin.disc;
@@ -98,7 +103,7 @@ export function MapPage() {
         attributionControl={false}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          url={CARTO_TILE_URL}
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CARTO'
         />
         {clusters.map((group) => {
@@ -115,10 +120,8 @@ export function MapPage() {
               />
             );
           }
-          const lat =
-            group.reduce((sum, r) => sum + r.lat, 0) / group.length;
-          const lng =
-            group.reduce((sum, r) => sum + r.lng, 0) / group.length;
+          const lat = group.reduce((sum, r) => sum + r.lat, 0) / group.length;
+          const lng = group.reduce((sum, r) => sum + r.lng, 0) / group.length;
           return (
             <Marker
               key={`c-${group.map((r) => r.id).join("-")}`}

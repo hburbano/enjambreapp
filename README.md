@@ -4,19 +4,19 @@
 
 **Webapp hoy, app completa mañana** — empezamos como webapp (SPA mobile-first) con visión de app nativa en App Store y Play Store (Capacitor reutilizando el mismo UI).
 
-> *Juntos protegemos a las abejas.*
+> _Juntos protegemos a las abejas._
 
 Monorepo pnpm con POC v0 en `apps/web` (UI + datos mock, sin backend). Documentación técnica en [`docs/`](./docs/).
 
 ## Qué tipo de app es
 
-| | |
-|---|---|
-| **Tipo** | Webapp ahora → app móvil completa (v2, Capacitor) |
-| **Dominio** | Conservación / ciencia ciudadana |
-| **Usuarios** | Ciudadanos que reportan enjambres; apicultores y rescatistas que atienden reportes |
-| **Plataforma v1** | Navegador (mobile-first) |
-| **Plataforma v2** | iOS + Android (misma UI, shell nativo) |
+|                   |                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| **Tipo**          | Webapp ahora → app móvil completa (v2, Capacitor)                                  |
+| **Dominio**       | Conservación / ciencia ciudadana                                                   |
+| **Usuarios**      | Ciudadanos que reportan enjambres; apicultores y rescatistas que atienden reportes |
+| **Plataforma v1** | Navegador (mobile-first)                                                           |
+| **Plataforma v2** | iOS + Android (misma UI, shell nativo)                                             |
 
 ### Funcionalidad principal
 
@@ -31,23 +31,23 @@ Documentación técnica (inglés): [`docs/README.md`](./docs/README.md) — deci
 
 ## Convenciones
 
-| Área | Idioma |
-|------|--------|
-| Código (identificadores, comentarios en código, commits técnicos) | Inglés |
-| Copy (texto de UI, documentación, mensajes al usuario) | Español |
+| Área                                                              | Idioma  |
+| ----------------------------------------------------------------- | ------- |
+| Código (identificadores, comentarios en código, commits técnicos) | Inglés  |
+| Copy (texto de UI, documentación, mensajes al usuario)            | Español |
 
 ---
 
 ## Stack
 
-| Herramienta | Rol |
-|-------------|-----|
-| **Node.js** (latest LTS) | Runtime de JavaScript |
-| **asdf** | Gestor de versiones (Node, etc.) |
-| **Corepack + pnpm** | Gestor de paquetes |
-| **React** | Biblioteca de UI |
-| **React Aria** | Componentes accesibles (Adobe) |
-| **Tailwind CSS** | Estilos con utilidades |
+| Herramienta              | Rol                              |
+| ------------------------ | -------------------------------- |
+| **Node.js** (latest LTS) | Runtime de JavaScript            |
+| **asdf**                 | Gestor de versiones (Node, etc.) |
+| **Corepack + pnpm**      | Gestor de paquetes               |
+| **React**                | Biblioteca de UI                 |
+| **React Aria**           | Componentes accesibles (Adobe)   |
+| **Tailwind CSS**         | Estilos con utilidades           |
 
 ---
 
@@ -135,9 +135,22 @@ Guía oficial: [Install Tailwind with Vite](https://tailwindcss.com/docs/install
 ```bash
 corepack enable
 pnpm install
+cp apps/web/.env.example apps/web/.env.local   # luego edita la key
 pnpm dev          # http://localhost:3000 — apps/web
 pnpm build        # build de todos los paquetes
 ```
+
+### Variables de entorno (`apps/web`)
+
+| Variable             | Descripción                                                                      |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `VITE_CARTO_API_KEY` | API key de Carto para el mapa (tiles). Opcional: sin key se usan tiles públicos. |
+
+1. Copia el template: `cp apps/web/.env.example apps/web/.env.local`
+2. Pon tu key en `.env.local` (gitignored; no la subas al repo)
+3. En Vercel/Cursor, define `VITE_CARTO_API_KEY` en la UI de secrets/env
+
+Reinicia el servidor de Vite después de cambiar env vars.
 
 ---
 
@@ -147,6 +160,8 @@ pnpm build        # build de todos los paquetes
 enjambreapp/
 ├── apps/
 │   ├── web/                 # Vite + React SPA (v0 POC)
+│   │   ├── .env.example     # template de env (copiar a .env.local)
+│   │   └── …
 │   └── mobile/              # (v2) Capacitor → App Store / Play Store
 ├── packages/
 │   ├── ui/                  # React Aria + Tailwind components
