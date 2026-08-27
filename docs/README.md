@@ -23,3 +23,4 @@ Technical and product documentation for the **enjambreapp** monorepo. All docs h
 ## Assets
 
 - [`ENJAMBRE.jpeg`](./ENJAMBRE.jpeg) — brand logo + mobile UI mockup (reference design)
+- Analysis: [mockup-analysis.md](./mockup-analysis.md)

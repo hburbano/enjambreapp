@@ -25,7 +25,7 @@ Monorepo pnpm con POC v0 en `apps/web` (UI + datos mock, sin backend). Documenta
 3. **Flujo comunitario** — reporta → localizamos → rescatamos → protegemos
 4. **Secciones** — Mapa, Reportes, Aprende (contenido educativo), Perfil
 
-Ver mockup de referencia: [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg)
+Ver mockup de referencia: [`docs/ENJAMBRE.jpeg`](./docs/ENJAMBRE.jpeg) — análisis en [`docs/mockup-analysis.md`](./docs/mockup-analysis.md).
 
 Documentación técnica (inglés): [`docs/README.md`](./docs/README.md) — decisiones de arquitectura, análisis del mockup, estructura del monorepo.
 
@@ -113,14 +113,6 @@ pnpm run build        # production build
 
 [React Aria](https://react-spectrum.adobe.com/react-aria/) ofrece hooks y componentes accesibles (WAI-ARIA, teclado, lectores de pantalla).
 
-### Cuando implementes el proyecto
-
-```bash
-pnpm add react react-dom
-pnpm add react-aria react-aria-components
-pnpm add -D @types/react @types/react-dom
-```
-
 Documentación oficial:
 
 - [Getting started](https://react-spectrum.adobe.com/react-aria/getting-started.html)
@@ -133,30 +125,6 @@ React Aria se integra bien con Tailwind: los componentes exponen estados (`data-
 ## 4. Tailwind CSS
 
 [Tailwind CSS](https://tailwindcss.com/) es un framework de utilidades CSS.
-
-### Cuando implementes el proyecto (Vite + React)
-
-```bash
-pnpm create vite@latest . --template react-ts
-pnpm install
-pnpm add -D tailwindcss @tailwindcss/vite
-```
-
-Configuración mínima en `vite.config.ts`:
-
-```ts
-import tailwindcss from "@tailwindcss/vite";
-
-export default {
-  plugins: [tailwindcss()],
-};
-```
-
-En tu archivo CSS principal:
-
-```css
-@import "tailwindcss";
-```
 
 Guía oficial: [Install Tailwind with Vite](https://tailwindcss.com/docs/installation/using-vite)
 
@@ -185,6 +153,9 @@ enjambreapp/
 │   ├── types/               # shared types (Report, User, …)
 │   └── config/              # shared tsconfig
 ├── docs/
+│   ├── ENJAMBRE.jpeg        # UI mockup + brand logo
+│   ├── mockup-analysis.md
+│   └── decisions/           # ADRs
 ├── pnpm-workspace.yaml
 ├── package.json
 └── README.md
