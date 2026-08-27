@@ -9,7 +9,6 @@
   },
   "scripts": {
     "build": "echo \"config has nothing to build\"",
-    "lint": "echo \"No lint configured yet\"",
     "typecheck": "echo \"No typecheck for config\""
   }
 }
