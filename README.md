@@ -135,7 +135,7 @@ Guía oficial: [Install Tailwind with Vite](https://tailwindcss.com/docs/install
 ```bash
 corepack enable
 pnpm install
-pnpm dev          # http://localhost:5173 — apps/web
+pnpm dev          # http://localhost:3000 — apps/web
 pnpm build        # build de todos los paquetes
 ```
 
