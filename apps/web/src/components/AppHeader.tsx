@@ -3,7 +3,7 @@ import { BeeIcon, beeSize } from "../icons";
 export function AppHeader() {
   return (
     <header className="safe-top z-20 border-b border-black/8 bg-white/90 px-4 pb-3 pt-2 backdrop-blur-md">
-      <div className="flex items-center gap-3">
+      <div className="mx-auto flex max-w-6xl items-center gap-3">
         <BrandMark />
         <div className="min-w-0 flex-1">
           <p className="font-display text-[15px] font-extrabold tracking-wide text-brand-ink uppercase leading-tight">

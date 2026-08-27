@@ -137,7 +137,7 @@ export function MapPage() {
       </MapContainer>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1000] p-4">
-        <div className="pointer-events-auto mx-auto max-w-md">
+        <div className="pointer-events-auto mx-auto w-full max-w-md md:max-w-lg">
           <Button
             className="w-full py-3.5 text-base shadow-lg"
             onPress={() => {

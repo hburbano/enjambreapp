@@ -26,15 +26,17 @@ export function ReportDetailPage() {
 
   return (
     <div className="flex h-full flex-col overflow-y-auto">
-      <div className="safe-top flex items-center gap-2 border-b border-black/8 bg-white px-3 py-3">
-        <Button variant="ghost" className="px-2 py-2" onPress={() => navigate(-1)}>
-          <ArrowLeftIcon size={18} />
-          Atrás
-        </Button>
-        <h1 className="font-display text-lg font-extrabold">Detalle</h1>
+      <div className="safe-top border-b border-black/8 bg-white">
+        <div className="mx-auto flex max-w-3xl items-center gap-2 px-3 py-3 md:px-6">
+          <Button variant="ghost" className="px-2 py-2" onPress={() => navigate(-1)}>
+            <ArrowLeftIcon size={18} />
+            Atrás
+          </Button>
+          <h1 className="font-display text-lg font-extrabold">Detalle</h1>
+        </div>
       </div>
 
-      <div className="px-4 py-5">
+      <div className="mx-auto w-full max-w-3xl px-4 py-5 md:px-6">
         <div className="flex h-40 items-center justify-center rounded-2xl bg-brand-yellow/40 text-brand-ink">
           <BeeIcon size={beeSize.hero} />
         </div>
