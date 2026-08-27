@@ -1,6 +1,12 @@
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { BottomNav } from "@enjambres/ui";
 import { AppHeader } from "./components/AppHeader";
+import {
+  BookIcon,
+  ClipboardListIcon,
+  MapPinIcon,
+  UserIcon,
+} from "./icons";
 import { MapPage } from "./pages/MapPage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { LearnPage } from "./pages/LearnPage";
@@ -8,10 +14,15 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { ReportDetailPage } from "./pages/ReportDetailPage";
 
 const navItems = [
-  { id: "mapa", label: "Mapa", href: "/", icon: "📍" },
-  { id: "reportes", label: "Reportes", href: "/reportes", icon: "📋" },
-  { id: "aprende", label: "Aprende", href: "/aprende", icon: "📖" },
-  { id: "perfil", label: "Perfil", href: "/perfil", icon: "👤" },
+  { id: "mapa", label: "Mapa", href: "/", icon: <MapPinIcon size={20} /> },
+  {
+    id: "reportes",
+    label: "Reportes",
+    href: "/reportes",
+    icon: <ClipboardListIcon size={20} />,
+  },
+  { id: "aprende", label: "Aprende", href: "/aprende", icon: <BookIcon size={20} /> },
+  { id: "perfil", label: "Perfil", href: "/perfil", icon: <UserIcon size={20} /> },
 ];
 
 function activeNavId(pathname: string): string {

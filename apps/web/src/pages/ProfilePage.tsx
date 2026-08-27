@@ -1,4 +1,5 @@
 import { Button } from "@enjambres/ui";
+import { UserIcon } from "../icons";
 
 export function ProfilePage() {
   return (
@@ -12,8 +13,8 @@ export function ProfilePage() {
       </p>
 
       <div className="mt-6 flex flex-col items-center rounded-2xl border border-dashed border-black/15 bg-white px-4 py-8 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-yellow text-3xl">
-          👤
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-yellow text-brand-ink">
+          <UserIcon size={32} />
         </div>
         <p className="mt-3 font-display text-lg font-bold">Invitado</p>
         <p className="mt-1 max-w-xs text-sm text-neutral-600">

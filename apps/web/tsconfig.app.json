@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["vite/client", "unplugin-icons/types/react"]
   },
   "include": ["src"]
 }

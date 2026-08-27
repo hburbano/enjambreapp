@@ -40,7 +40,7 @@ export function BottomNav({ items, activeId, onNavigate }: BottomNavProps) {
               >
                 <span
                   className={[
-                    "flex h-7 w-7 items-center justify-center rounded-full text-lg",
+                    "flex h-7 w-7 items-center justify-center rounded-full",
                     active ? "bg-brand-yellow/35" : "",
                   ].join(" ")}
                   aria-hidden

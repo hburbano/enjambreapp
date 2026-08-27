@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@enjambres/ui";
 import { getReportById } from "../data/mock";
+import { ArrowLeftIcon, BeeIcon } from "../icons";
 
 const statusLabel = {
   reported: "Reportado",
@@ -27,14 +28,15 @@ export function ReportDetailPage() {
     <div className="flex h-full flex-col overflow-y-auto">
       <div className="safe-top flex items-center gap-2 border-b border-black/8 bg-white px-3 py-3">
         <Button variant="ghost" className="px-2 py-2" onPress={() => navigate(-1)}>
-          ← Atrás
+          <ArrowLeftIcon size={18} />
+          Atrás
         </Button>
         <h1 className="font-display text-lg font-extrabold">Detalle</h1>
       </div>
 
       <div className="px-4 py-5">
-        <div className="flex h-40 items-center justify-center rounded-2xl bg-brand-yellow/40 text-5xl">
-          🐝
+        <div className="flex h-40 items-center justify-center rounded-2xl bg-brand-yellow/40 text-brand-ink">
+          <BeeIcon size={64} />
         </div>
         <h2 className="mt-4 font-display text-2xl font-extrabold">
           {report.title}

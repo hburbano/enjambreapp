@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ReportCard } from "@enjambres/ui";
 import { mockReports } from "../data/mock";
+import { BeeIcon } from "../icons";
 
 export function ReportsPage() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export function ReportsPage() {
           <li key={report.id}>
             <ReportCard
               report={report}
+              icon={<BeeIcon size={22} />}
               onViewDetail={(r) => navigate(`/reportes/${r.id}`)}
             />
           </li>

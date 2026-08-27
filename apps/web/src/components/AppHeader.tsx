@@ -1,3 +1,5 @@
+import { BeeIcon } from "../icons";
+
 export function AppHeader() {
   return (
     <header className="safe-top z-20 border-b border-black/8 bg-white/90 px-4 pb-3 pt-2 backdrop-blur-md">
@@ -32,7 +34,7 @@ function BrandMark() {
           fill="#F5C518"
         />
       </svg>
-      <span className="relative z-10 text-lg leading-none">🐝</span>
+      <BeeIcon size={20} className="relative z-10 text-brand-ink" />
     </div>
   );
 }

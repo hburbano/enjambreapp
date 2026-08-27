@@ -1,4 +1,5 @@
 import type { Report } from "@enjambres/types";
+import type { ReactNode } from "react";
 import { Button } from "./Button";
 
 function formatRelativeTime(iso: string, now = Date.now()): string {
@@ -22,17 +23,19 @@ const statusLabel: Record<Report["status"], string> = {
 export interface ReportCardProps {
   report: Report;
   onViewDetail?: (report: Report) => void;
+  /** Leading mark — pass a tree-shaken icon from the app (e.g. BeeIcon). */
+  icon?: ReactNode;
 }
 
-export function ReportCard({ report, onViewDetail }: ReportCardProps) {
+export function ReportCard({ report, onViewDetail, icon }: ReportCardProps) {
   return (
     <article className="rounded-2xl border border-black/8 bg-white p-4 shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
       <div className="flex items-start gap-3">
         <div
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-xl"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-brand-ink"
           aria-hidden
         >
-          🐝
+          {icon}
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="font-display text-base font-bold text-brand-ink">

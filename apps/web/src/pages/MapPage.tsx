@@ -5,6 +5,7 @@ import type { Report } from "@enjambres/types";
 import { Button } from "@enjambres/ui";
 import { useNavigate } from "react-router-dom";
 import { mockReports } from "../data/mock";
+import { BeeIcon, CurrentLocationIcon, beeMarkerSvg } from "../icons";
 
 const COLOMBIA_CENTER: [number, number] = [4.57, -74.3];
 const DEFAULT_ZOOM = 5.4;
@@ -16,8 +17,8 @@ function beePinIcon() {
       width:36px;height:36px;border-radius:9999px;
       background:#F5C518;border:2px solid #111;
       display:flex;align-items:center;justify-content:center;
-      box-shadow:0 4px 10px rgba(0,0,0,.25);font-size:18px;
-    ">🐝</div>`,
+      box-shadow:0 4px 10px rgba(0,0,0,.25);
+    ">${beeMarkerSvg}</div>`,
     iconSize: [36, 36],
     iconAnchor: [18, 36],
     popupAnchor: [0, -34],
@@ -57,7 +58,7 @@ function LocateControl() {
   return (
     <button
       type="button"
-      className="absolute right-3 bottom-24 z-[1000] flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-lg shadow-md outline-none focus-visible:ring-2 focus-visible:ring-brand-ink"
+      className="absolute right-3 bottom-24 z-[1000] flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-brand-ink shadow-md outline-none focus-visible:ring-2 focus-visible:ring-brand-ink"
       aria-label="Centrar en mi ubicación"
       onClick={() => {
         if (!navigator.geolocation) {
@@ -75,7 +76,7 @@ function LocateControl() {
         );
       }}
     >
-      ◎
+      <CurrentLocationIcon size={22} />
     </button>
   );
 }
@@ -135,13 +136,13 @@ export function MapPage() {
           <Button
             className="w-full py-3.5 text-base shadow-lg"
             onPress={() => {
-              // Report flow lands in v1; for POC jump to list with intent.
               window.alert(
                 "Pronto podrás reportar con foto y ubicación. Por ahora explora el mapa y los reportes de ejemplo.",
               );
             }}
           >
-            <span aria-hidden>🐝</span> Reportar enjambre
+            <BeeIcon size={20} aria-hidden />
+            Reportar enjambre
           </Button>
         </div>
       </div>
