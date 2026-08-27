@@ -5,23 +5,25 @@ import type { Report } from "@enjambres/types";
 import { Button } from "@enjambres/ui";
 import { useNavigate } from "react-router-dom";
 import { mockReports } from "../data/mock";
-import { BeeIcon, CurrentLocationIcon, beeMarkerSvg } from "../icons";
+import {
+  BeeIcon,
+  CurrentLocationIcon,
+  bee,
+  beePinDiscHtml,
+  beeSize,
+} from "../icons";
 
 const COLOMBIA_CENTER: [number, number] = [4.57, -74.3];
 const DEFAULT_ZOOM = 5.4;
 
 function beePinIcon() {
+  const disc = bee.pin.disc;
   return L.divIcon({
     className: "enjambres-pin",
-    html: `<div style="
-      width:36px;height:36px;border-radius:9999px;
-      background:#F5C518;border:2px solid #111;
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 4px 10px rgba(0,0,0,.25);
-    ">${beeMarkerSvg}</div>`,
-    iconSize: [36, 36],
-    iconAnchor: [18, 36],
-    popupAnchor: [0, -34],
+    html: beePinDiscHtml,
+    iconSize: [disc, disc],
+    iconAnchor: [disc / 2, disc],
+    popupAnchor: [0, -(disc - 2)],
   });
 }
 
@@ -141,7 +143,7 @@ export function MapPage() {
               );
             }}
           >
-            <BeeIcon size={20} aria-hidden />
+            <BeeIcon size={beeSize.chrome} aria-hidden />
             Reportar enjambre
           </Button>
         </div>
