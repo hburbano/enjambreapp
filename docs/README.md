@@ -11,6 +11,7 @@ Technical and product documentation for the **enjambreapp** monorepo. All docs h
 | [ADR-001: App vs webapp](./decisions/001-app-vs-webapp.md) | Why we ship a webapp first, not a native app |
 | [ADR-002: Monorepo structure](./decisions/002-monorepo-structure.md) | pnpm workspaces monorepo (not Turborepo) |
 | [ADR-003: Backend & hosting](./decisions/003-backend-hosting.md) | Vercel POC (no BE) → Supabase free tier; PocketBase liked alternative; Cloudflare out |
+| [ADR-004: Identity & registration](./decisions/004-identity-and-registration.md) | Report-first: no account to report; anonymous session; optional contact/account; rescuers need identity |
 
 ## Conventions
 

@@ -70,7 +70,7 @@ Build v1 web code as if it will ship inside Capacitor:
 - **Mobile-first layouts** — safe areas, touch targets, bottom nav
 - **Shared UI in `packages/ui`** — not trapped inside `apps/web` only
 - **Device APIs via abstractions** — e.g. `getLocation()`, `pickPhoto()` wrappers so Capacitor plugins swap in later
-- **No browser-only assumptions in core flows** — report + map + auth must work in WebView
+- **No browser-only assumptions in core flows** — report + map + optional identity must work in WebView ([ADR-004](./004-identity-and-registration.md): no signup wall to report)
 - **Env-based config** — API URL, map keys, feature flags for web vs wrapped app
 
 ## PWA stance
@@ -92,3 +92,4 @@ PWA is a **stepping stone**, not the end state:
 
 - [Mockup analysis](../mockup-analysis.md)
 - [ADR-002: Monorepo structure](./002-monorepo-structure.md) — includes planned `apps/mobile`
+- [ADR-004: Identity & registration](./004-identity-and-registration.md) — report without an account

@@ -119,7 +119,7 @@ reported → visible_on_map → rescue_in_progress → resolved
 | **Rescuer / beekeeper** | View open reports on map, claim/update status, contact reporter |
 | **Admin** (future) | Moderate reports, manage Aprende content, verify rescuers |
 
-Auth is required for Perfil and likely for posting reports (or allow anonymous report + optional account link).
+**Reports do not require an account** ([ADR-004](./decisions/004-identity-and-registration.md)). Perfil is guest-first: optional identity later; rescuers need a lightweight account.
 
 ---
 
@@ -143,7 +143,7 @@ The mockup is framed as a **phone**, but the layout is a standard **responsive w
 - [ ] Report flow: photo + geolocation + neighborhood/city
 - [ ] Report list (Reportes tab)
 - [ ] Report detail view
-- [ ] Basic auth (Perfil)
+- [ ] Guest-first Perfil (optional identity; no signup wall) — [ADR-004](./decisions/004-identity-and-registration.md)
 - [ ] Static Aprende section (even if markdown-backed initially)
 
 ### Should have (v1.1)
@@ -163,7 +163,7 @@ The mockup is framed as a **phone**, but the layout is a standard **responsive w
 
 ## Open questions
 
-1. **Anonymous reports** — allowed without login, or sign-in required?
+1. **Anonymous reports** — **decided (ADR-004):** allowed without login. Silent anonymous session; optional contact after submit; optional account to claim/history. Rescuers still need identity.
 2. **Rescuer onboarding** — self-register or invite-only?
 3. **Map provider** — OSM/Leaflet (free) vs Mapbox (richer, quota)?
 4. **Photo moderation** — manual review before public map pin?

@@ -150,7 +150,7 @@ export function MapPage() {
             className="w-full py-3.5 text-base shadow-lg"
             onPress={() => {
               window.alert(
-                "Pronto podrás reportar con foto y ubicación. Por ahora explora el mapa y los reportes de ejemplo.",
+                "Pronto podrás reportar con foto y ubicación, sin crear cuenta. Por ahora explora el mapa y los reportes de ejemplo.",
               );
             }}
           >

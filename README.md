@@ -20,7 +20,7 @@ Monorepo pnpm con POC v0 en `apps/web` (UI + datos mock, sin backend). Documenta
 
 ### Funcionalidad principal
 
-1. **Reportar enjambre** — foto + ubicación en el mapa
+1. **Reportar enjambre** — foto + ubicación en el mapa (**sin crear cuenta**; [ADR-004](./docs/decisions/004-identity-and-registration.md))
 2. **Mapa en vivo** — ver reportes cercanos (clustering por zona)
 3. **Flujo comunitario** — reporta → localizamos → rescatamos → protegemos
 4. **Secciones** — Mapa, Reportes, Aprende (contenido educativo), Perfil
