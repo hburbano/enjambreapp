@@ -77,22 +77,30 @@ GitHub → Vercel (apps/web)
 
 - Wire env-based `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (or equivalent)
 - Replace mocks with Supabase tables / Storage (users/profiles, reports, photos)
-- Use Supabase Auth for Perfil; RLS policies for reporter vs rescuer access
+- Use Supabase Auth as a **silent anonymous session** for reporters (no signup wall); optional magic link later. RLS policies for reporter vs rescuer access. See [ADR-004](./004-identity-and-registration.md).
 
 ## Data model (draft — for v1, not v0)
 
 ```
 profiles  (extends auth.users)
-  id, email, role (reporter | rescuer | admin), display_name, …
+  id, role (reporter | rescuer | admin),
+  identity (anonymous | registered),
+  display_name,              -- optional; guests have none
+  email,                     -- nullable until they link an account
+  …
 
 reports
-  id, user_id, lat, lng, city, department, neighborhood,
+  id, user_id,               -- v1: always set (anon or registered session)
+  lat, lng, city, department, neighborhood,
   photo_path, status (reported | visible | in_rescue | resolved),
+  contact_email, contact_phone,   -- optional, never public (ADR-004)
   created_at, updated_at
 
 learn_articles (v0/v1 can stay static markdown)
   id, slug, title, body, …
 ```
+
+Identity policy (who signs up, who does not): [ADR-004](./004-identity-and-registration.md).
 
 Geo: store `lat`/`lng` (or PostGIS later if queries hurt); clustering stays client-side on the map.
 
@@ -111,3 +119,4 @@ Geo: store `lat`/`lng` (or PostGIS later if queries hurt); clustering stays clie
 - [SEO](../seo.md) — `VITE_SITE_URL`, Open Graph, sitemap on the Vercel SPA
 - [ADR-001: App vs webapp](./001-app-vs-webapp.md)
 - [ADR-002: Monorepo structure](./002-monorepo-structure.md) — **pnpm workspaces, not Turborepo**
+- [ADR-004: Identity & registration](./004-identity-and-registration.md) — report without an account; how v1 uses Supabase Auth

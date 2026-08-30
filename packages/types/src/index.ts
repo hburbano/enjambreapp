@@ -6,6 +6,9 @@ export type ReportStatus =
 
 export type UserRole = "reporter" | "rescuer" | "admin";
 
+/** How the person is known to the system. Guests never register (ADR-004). */
+export type IdentityKind = "anonymous" | "registered";
+
 export interface Report {
   id: string;
   title: string;
@@ -17,13 +20,18 @@ export interface Report {
   status: ReportStatus;
   createdAt: string;
   photoUrl?: string;
+  /** Session owner. Absent in v0 mocks; set for every v1 report (anon or registered). */
+  authorId?: string;
 }
 
 export interface User {
   id: string;
-  displayName: string;
-  email: string;
+  identity: IdentityKind;
   role: UserRole;
+  /** Guests have none until they opt in. */
+  displayName?: string;
+  /** Null/absent until they link email (magic link) or register as rescuer. */
+  email?: string;
 }
 
 export interface LearnArticle {
